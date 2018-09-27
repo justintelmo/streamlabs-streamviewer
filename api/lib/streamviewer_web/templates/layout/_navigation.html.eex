@@ -11,28 +11,28 @@
     </div>
 
     <div class="top-bar-right">
-        <ul class="menu">
-            <%= if @conn.assigns[:user] do %>
-                <li>
-                    Welcome, <%= @conn.assigns.user.first_name %>!
-                </li>
-                <li>
-                    <a href="">Streams</a>
-                </li>
-                <li>
-                    <a href="">My Profile</a>
-                </li>
-                <li>
-                    <%= link "Sign out", to: auth_path(@conn, :delete), class: "button alert" %>
-                </li>
-            <% else %>
-                <li>
-                    <a href="#">Streams</a>
-                </li>
-                <li>
-                    <%= link "Sign in with Google", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %>
-                </li>
-            <% end %>
-        </ul>
-    </div>
+    <ul class="menu">
+      <%= if @conn.assigns[:user] do %>
+        <li class="menu-text">
+          Welcome, <%= @conn.assigns.user.first_name %>!
+        </li>
+        <li>
+          <%= link "Videos", to: video_path(@conn, :index) %>  <!-- Update this line -->
+        </li>
+        <li>
+          <%= link "Add video", to: video_path(@conn, :new) %>  <!-- Update this line -->
+        </li>
+        <li>
+          <%= link "Sign out", to: auth_path(@conn, :delete), class: "button alert" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link "Videos", to: video_path(@conn, :index) %>  <!-- Update this line -->
+        </li>
+        <li>
+          <%= link "Sign in with Google", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>

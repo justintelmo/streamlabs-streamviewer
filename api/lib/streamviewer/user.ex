@@ -1,6 +1,8 @@
 defmodule Streamviewer.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Streamviewer.User
+  alias Streamviewer.Videos.Video
 
 
   schema "users" do
@@ -9,7 +11,8 @@ defmodule Streamviewer.User do
     field :last_name, :string
     field :provider, :string
     field :token, :string
-
+    has_many :videos, Video
+    
     timestamps()
   end
 
