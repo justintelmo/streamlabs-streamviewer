@@ -10,17 +10,26 @@ config :streamviewer,
   ecto_repos: [Streamviewer.Repo]
 
 # Configures the endpoint
-config :streamviewer, Streamviewer.Endpoint,
+config :streamviewer, StreamviewerWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "RAnwUrYnRZ5ppYwO4Al9UBEdpCFkG1aoi17FdvceyrYE/zHsiOMxPV+CKkjT5Vv9",
-  render_errors: [view: Streamviewer.ErrorView, accepts: ~w(json)],
+  secret_key_base: "WaxeL+6nAWHdY8U/Om/2vw7WRqnSWAPwLAQI6Sifz+HJEFkx6eHktFenR9HuLtyT",
+  render_errors: [view: StreamviewerWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Streamviewer.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:user_id]
+
+config :ueberauth, Ueberauth,
+  providers: [
+    google: {Ueberauth.Strategy.Google, [default_scope: "emails profile plus.me"]},
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
