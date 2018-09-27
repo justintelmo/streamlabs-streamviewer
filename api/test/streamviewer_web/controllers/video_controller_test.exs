@@ -83,10 +83,9 @@ defmodule StreamviewerWeb.VideoControllerTest do
     setup [:create_video]
 
     test "deletes chosen video", %{conn: conn, video: video, user: user} do
-      conn =
-        conn
-        |> assign(:user, user)
-        |> delete(video_path(conn, :delete, video))
+      conn = conn
+      |> assign(:user, user)
+      |> delete(video_path(conn, :delete, video))
 
       assert redirected_to(conn) == video_path(conn, :index)
 

@@ -10,6 +10,16 @@ defmodule StreamviewerWeb.Router do
     plug Streamviewer.Plugs.SetUser
   end
 
+  pipeline :auth do
+    plug StreamviewerWeb.Plugs.RequireAuth
+  end
+
+  scope "/", StreamviewerWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/videos", VideoController, only: [:new, :create]
+  end
+  
   pipeline :api do
     plug :accepts, ["json"]
   end

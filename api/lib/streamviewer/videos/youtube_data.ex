@@ -19,14 +19,14 @@ defmodule Streamviewer.Videos.YouTubeData do
                     |> create_video_attrs(video_data)
 
         changeset = create_changeset(conn, video_attrs)
-        
+
         case Streamviewer.Repo.insert(changeset) do
             {:ok, video} ->
                 conn
                 |> put_flash(:info, "Video created successfully.")
                 |> redirect(to: video_path(conn, :show, video))
             {:error, _video} ->
-                video = Video.Streamviewer.Repo.get_by(video_id: video_id)
+                video = Streamviewer.Repo.get_by(video_id: video_id)
                 conn
                 |> put_flash(:info, "Video has already been created.")
                 |> redirect(to: video_path(conn, :show, video))

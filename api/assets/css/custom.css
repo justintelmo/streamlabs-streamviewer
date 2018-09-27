@@ -39,3 +39,11 @@
 .callout:empty {
     display: none;
 }
+
+.video-index {
+    padding-top: 10px;
+  }
+  .duration-text {
+    font-size: .65em;
+    color: #555;
+  }
